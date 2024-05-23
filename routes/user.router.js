@@ -18,7 +18,7 @@ const routeHandler = (req, res) => {
         userController.putUser(req, res, url[2]);
     }
     else{
-        res.writeHead(404);
+        res.writeHead(404, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({message: 'Route not found'}));
     }
 };
