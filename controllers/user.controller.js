@@ -28,7 +28,7 @@ class UserController {
         res.end(JSON.stringify(Object.fromEntries(db.entries())));
     }
     async getUserById(req, res, id){
-        const user = db.get(Number(id));
+        const user = db.get(id);
         if (user) {
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(user));
@@ -39,7 +39,7 @@ class UserController {
         };
     }
     async deleteUser(req, res, id){
-        const user = db.delete(Number(id));
+        const user = db.delete(id);
         if (user) {
             res.writeHead(201, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(`Пользователь с id ${id} был удален`));
