@@ -2,7 +2,7 @@ const db = require('../db');
 let countID = 1;
 class UserController {
     
-    async createUser(req, res) {
+    createUser = async(req, res) => {
         let body = '';
         req.on('data', (data) => {
             body += data;
@@ -25,12 +25,12 @@ class UserController {
         
     }
 
-    async getUser(req, res) {
+    getUser = async(req, res) => {
         res.writeHead(201, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify(Object.fromEntries(db.entries())));
     }
 
-    async getUserById(req, res, id) {
+    getUserById = async(req, res, id) => {
         const user = db.get(Number(id));
         if (user) {
             res.writeHead(201, { 'Content-Type': 'application/json' });
@@ -42,7 +42,7 @@ class UserController {
         };
     }
 
-    async deleteUser(req, res, id) {
+    deleteUser = async(req, res, id) => {
         if (db.delete(Number(id))) {
             res.writeHead(201, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(`Пользователь с id ${id} был удален`));
@@ -53,7 +53,7 @@ class UserController {
         };
     }
 
-    async putUser(req, res, id) {
+    putUser = async(req, res, id) =>{
         if(!(db.get(Number(id)))) {
             res.writeHead(400, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({message: "User not found"}));
