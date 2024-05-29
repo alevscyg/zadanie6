@@ -31,7 +31,7 @@ class UserController {
     }
 
     getUserById = async(req, res, id) => {
-        const user = db.get(Number(id));
+        const user = await db.get(Number(id));
         if (user) {
             res.writeHead(201, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(user));
@@ -54,7 +54,7 @@ class UserController {
     }
 
     putUser = async(req, res, id) =>{
-        if(!(db.get(Number(id)))) {
+        if(!(await db.get(Number(id)))) {
             res.writeHead(400, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({message: "User not found"}));
         }
